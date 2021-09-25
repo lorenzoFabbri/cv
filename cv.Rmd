@@ -1,49 +1,54 @@
 ---
-name: Marie
-surname: Curie
-position: "Professor"
-address: "School of Physics & Chemistry, École Normale Supérieure"
-phone: +1 22 3333 4444
-www: mariecurie.com
-email: "Marie.Curie@ens.fr"
-twitter: mariecurie
-github: mariecurie
-linkedin: mariecurie
+name: Lorenzo
+surname: Fabbri
+position: "PhD Student"
+address: "Barcelona Institute for Global Health"
+#phone:
+www: lorenzofabbri.github.io/
+email: "lorenzo.fabbri@isglobal.org"
+twitter: lorenzoF92SM
+github: lorenzoFabbri
+linkedin: lorenzo-fabbri-418721180
 date: "`r format(Sys.time(), '%B %Y')`"
-output: vitae::awesomecv
+headcolor: 0c9c2e
+output:
+  vitae::awesomecv
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
 library(vitae)
+library(tibble)
+library(dplyr)
+library(scholar)
+library(stringr)
 ```
 
-# Some stuff about me
+# Research Interests
 
- * I poisoned myself doing research.
- * I was the first woman to win a Nobel prize
- * I was the first person and only woman to win a Nobel prize in two different sciences.
-
+ * Exposomics and Epidemiology
+ * Multi-Omics Data Integration
+ * Causal Inference and Bayesian Methods for High-Dimensional Data
+ 
 # Education
 
 ```{r}
-library(tibble)
-tribble(
-  ~ Degree, ~ Year, ~ Institution, ~ Where,
-  "Informal studies", "1889-91", "Flying University", "Warsaw, Poland",
-  "Master of Physics", "1893", "Sorbonne Université", "Paris, France",
-  "Master of Mathematics", "1894", "Sorbonne Université", "Paris, France"
-) %>% 
-  detailed_entries(Degree, Year, Institution, Where)
+tibble::tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where, 
+ "B.Sc. in Biotechnology (103/110)", "2012-16", "University of Parma", "Parma, Italy", 
+ "M.Sc. Student in Computational Science", "2016-17", "University of Lugano", "Lugano, Switzerland", 
+ "M.Sc. in Quantitative and Computational Biology (110/110 With Honors)", "2017-19", "University of Trento", "Trento, Italy"
+) %>%
+  vitae::detailed_entries(Degree, Year, Institution, Where)
 ```
 
-# Nobel Prizes
+# Continuing Education
 
 ```{r}
 tribble(
   ~Year, ~Type, ~Desc,
-  1903, "Physics", "Awarded for her work on radioactivity with Pierre Curie and Henri Becquerel",
-  1911, "Chemistry", "Awarded for the discovery of radium and polonium"
+  1903, "Physics", "Awarded for her work on radioactivity with Pierre Curie and Henri Becquerel"
 ) %>% 
   brief_entries(
     glue::glue("Nobel Prize in {Type}"),
@@ -52,13 +57,27 @@ tribble(
   )
 ```
 
+# Working Experience
+
+# Skills
+
+# Honors and Awards
+
 # Publications
 
-```{r}
-library(dplyr)
-knitr::write_bib(c("vitae", "tibble"), "packages.bib")
-
-bibliography_entries("packages.bib") %>%
-  arrange(desc(author$family), issued)
+```{r publications}
+scholar::get_publications("QbPv1H0AAAAJ") %>%
+  dplyr::mutate(author = author %>% as.character() %>% stringr::str_trim(), 
+                journal = journal, 
+                first_author = dplyr::case_when(stringr::str_starts(author, "L Fabbri") ~ TRUE, 
+                                                TRUE ~ FALSE)) %>%
+  dplyr::arrange(desc(year)) %>%
+  vitae::detailed_entries(
+    what = title, 
+    when = as.character(year), 
+    with = author, 
+    where = journal
+  )
 ```
 
+# Conference Presentations
