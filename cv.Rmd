@@ -6,9 +6,10 @@ address: "Barcelona Institute for Global Health"
 #phone:
 www: lorenzofabbri.github.io/
 email: "lorenzo.fabbri@isglobal.org"
-twitter: lorenzoF92SM
-github: lorenzoFabbri
 linkedin: lorenzo-fabbri-418721180
+github: lorenzoFabbri
+twitter: lorenzoF92SM
+orcid: 0000-0003-3031-322X
 date: "`r format(Sys.time(), '%B %Y')`"
 headcolor: 0c9c2e
 output:
@@ -44,6 +45,9 @@ tibble::tribble(
 ```
 
 # Continuing Education
+
+# Summer School Exposome + Advanced Statistics SBI + Omics Integration School
+# PhD: field work (wet lab, data management) + CI club + Open Science + supervision
 
 ```{r}
 tribble(
