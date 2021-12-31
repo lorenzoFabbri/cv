@@ -24,6 +24,9 @@ library(tibble)
 library(dplyr)
 library(scholar)
 library(stringr)
+library(glue)
+library(lubridate)
+library(zoo)
 ```
 
 # Research Interests
@@ -34,30 +37,52 @@ library(stringr)
  
 # Education
 
+<!-- PhD: field work (wet lab, data management) + UPF + Intervals -->
+<!-- PhD: CI club + Open Science + supervision -->
+
 ```{r}
 tibble::tribble(
-  ~ Degree, ~ Year, ~ Institution, ~ Where, 
+  ~ Degree, ~ Year, ~ Institution, ~ Where, ~ Details, 
  "B.Sc. in Biotechnology (103/110)", "2012-16", "University of Parma", "Parma, Italy", 
+  list("Thesis: Whole-body PBPK Modeling of Valproic Acid"), 
  "M.Sc. Student in Computational Science", "2016-17", "University of Lugano", "Lugano, Switzerland", 
- "M.Sc. in Quantitative and Computational Biology (110/110 With Honors)", "2017-19", "University of Trento", "Trento, Italy"
+  list(""), 
+ "M.Sc. in Quantitative and Computational Biology (110/110 With Honors)", "2017-19", "University of Trento", "Trento, Italy", 
+  list("Thesis: Machine Learning for Predictive Drug-Induced Hepatotoxicity")
 ) %>%
-  vitae::detailed_entries(Degree, Year, Institution, Where)
+  dplyr::arrange(desc(Year)) %>%
+  vitae::detailed_entries(Degree, Year, Institution, Where, Details)
 ```
 
 # Continuing Education
 
-# Summer School Exposome + Advanced Statistics SBI + Omics Integration School
-# PhD: field work (wet lab, data management) + CI club + Open Science + supervision
-
 ```{r}
-tribble(
-  ~Year, ~Type, ~Desc,
-  1903, "Physics", "Awarded for her work on radioactivity with Pierre Curie and Henri Becquerel"
-) %>% 
-  brief_entries(
-    glue::glue("Nobel Prize in {Type}"),
-    Year, 
-    Desc
+tibble::tribble(
+  ~ Course, ~ Institution, ~ Where, ~ Dates, 
+  "Advanced Course in Alternatives to Animal Experimentation", 
+    "University of Genova", "Genoa, Italy", "November 1, 2015", 
+  "MARVEL School on Variationally Enhanced Sampling", 
+    "University of Lugano", "Lugano, Switzerland", "February 1, 2017", 
+  "Effective High Performance Computing Summer School", 
+    "CSCS and University of Lugano", "Lugano, Switzerland", "July 1, 2017", 
+  "Image Analysis and Modeling of Complex Biological Dynamics", 
+    "University of Wurzburg", "Wurzburg, Germany", "September 1, 2017", 
+  "Mendelian Randomisation", "Imperial College London", "Online", "May 1, 2020", 
+  "Metabolomics Data Processing and Data Analysis", 
+    "University of Birmingham", "Online", "February 1, 2021", 
+  "Alpine Exposome Summer School", "Inserm and ATHLETE", "Online", "June 1, 2021", 
+  "Advanced Statistics: Statistical Modelling", 
+    "Swiss Institute of Bioinformatics", "Online", "August 1, 2021", 
+  "ELIXIR Omics Integration and Systems Biology", 
+    "National Bioinformatics Infrastructure Sweden", "Online", "September 1, 2021"
+) %>%
+  dplyr::mutate(., Dates = zoo::as.yearmon(lubridate::mdy(Dates))) %>%
+  dplyr::arrange(desc(Dates)) %>%
+  vitae::brief_entries(
+    glue::glue("\\textbf{<Course>} (<Institution>, <Where>)", 
+               .open = "<", .close = ">"), 
+    Dates, 
+    .protect = FALSE
   )
 ```
 
