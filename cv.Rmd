@@ -47,7 +47,7 @@ edu <- rorcid::orcid_educations("0000-0003-3031-322X")$`0000-0003-3031-322X`$`af
 edu$details <- list(
   c("Projects: HELIX, ATHLETE, OBERON
   \\begin{itemize}
-      \\item Supervisors: Prof. Martine Vrijheid (ISGlobal), Dr. Lea Maitre (ISGlobal)
+      \\item Supervisors: Prof. Martine Vrijheid (ISGlobal), Prof. Lea Maitre (ISGlobal)
     \\end{itemize}"), 
   c("Master thesis (FBK, Trento): \\href{https://gitlab.com/lorenzo.fabbri92sm/master-thesis-fbk}{Machine Learning for Predictive Drug-Induced Hepatotoxicity}
   \\begin{itemize}
