@@ -101,7 +101,8 @@ tibble::tribble(
   "Advanced Statistics: Statistical Modelling", 
     "Swiss Institute of Bioinformatics", "Online", "August 1, 2021", 
   "ELIXIR Omics Integration and Systems Biology", 
-    "National Bioinformatics Infrastructure Sweden", "Online", "September 1, 2021"
+    "National Bioinformatics Infrastructure Sweden", "Online", "September 1, 2021", 
+  "Fundamentals of Epidemiology (EPM101)", "LSHTM", "Online", "September 1, 2021"
 ) %>%
   dplyr::mutate(., Dates = zoo::as.yearmon(lubridate::mdy(Dates))) %>%
   dplyr::arrange(desc(Dates)) %>%
@@ -126,6 +127,19 @@ emp %>%
     with = `employment-summary.organization.name`, 
     where = `employment-summary.organization.address.city`
   )
+```
+
+# Service
+
+```{r}
+service <- tibble::tribble(
+  ~ type, ~ details, ~ when.start, ~ when.end, 
+  "Organisations", "COnsortium of METabolomics Studies (COMETS) - Early Career Scientist Working Group", "2022", ""
+)
+service %>%
+  vitae::detailed_entries(with = type, why = details, 
+                          when = glue::glue("{`when.start`} - {`when.end`}", 
+                                            .na = ""))
 ```
 
 # Skills
