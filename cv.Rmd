@@ -6,9 +6,8 @@ address: "Barcelona Institute for Global Health"
 #phone:
 www: lorenzofabbri.github.io/
 email: "lorenzo.fabbri@isglobal.org"
-linkedin: lorenzo-fabbri-418721180
 github: lorenzoFabbri
-twitter: lorenzoF92SM
+twitter: lorenzoF_SM
 orcid: 0000-0003-3031-322X
 date: "`r format(Sys.time(), '%B %Y')`"
 headcolor: 0c9c2e
@@ -35,9 +34,8 @@ library(kableExtra)
 
 # Research Interests
 
- * Exposomics and Epidemiology
- * Multi-Omics Data Integration
- * Causal Inference and Bayesian Methods for High-Dimensional Data
+ * Causal Inference, Mediation Analysis
+ * Environmental Epidemiology
  
 # Education
 
@@ -102,7 +100,11 @@ tibble::tribble(
     "Swiss Institute of Bioinformatics", "Online", "August 1, 2021", 
   "ELIXIR Omics Integration and Systems Biology", 
     "National Bioinformatics Infrastructure Sweden", "Online", "September 1, 2021", 
-  "Fundamentals of Epidemiology (EPM101)", "LSHTM", "Online", "September 1, 2021"
+  "Fundamentals of Epidemiology (EPM101)", "LSHTM", "Online", "September 1, 2021", 
+  "Computational Bayesian methods using brms in R", "Physalia-courses", "Online", 
+  "February 1, 2022", 
+  "Spring School in Causal Inference with Observational Data", "Causal Insights", 
+  "Leeds, UK", "April 1, 2022"
 ) %>%
   dplyr::mutate(., Dates = zoo::as.yearmon(lubridate::mdy(Dates))) %>%
   dplyr::arrange(desc(Dates)) %>%
@@ -134,7 +136,13 @@ emp %>%
 ```{r}
 service <- tibble::tribble(
   ~ type, ~ details, ~ when.start, ~ when.end, 
-  "Organisations", "COnsortium of METabolomics Studies (COMETS) - Early Career Scientist Working Group", "2022", ""
+  "Organisations", "COnsortium of METabolomics Studies (COMETS) - Early Career Scientist Working Group", 
+  "2022", "", 
+  "Societies", "International Society for Environmental Epidemiology (ISEE) - 
+                Students and New Researchers Network (SNRN), 
+                Capacity Building and Education Committee, 
+                Europe Chapter", 
+  "2022", ""
 )
 service %>%
   vitae::detailed_entries(with = type, why = details, 
@@ -168,6 +176,7 @@ fu <- rorcid::orcid_fundings("0000-0003-3031-322X")$`0000-0003-3031-322X`$group$
   dplyr::select(title.title.value, `start-date.year.value`, organization.name)
 fu.manual <- tibble::tribble(
   ~ title.title.value, ~ `start-date.year.value`, ~ organization.name, 
+  "Outstanding Abstract by a Student", 2022, "International Society for Environmental Epidemiology", 
   "Erasmus+ Traineeship Programme Scholarship", 2019, "Università degli Studi di Trento", 
   "Student Research Assistant Fellowship", 2017, "Università della Svizzera italiana", 
   "Faculty of Informatics Scholarship", 2016, "Università della Svizzera italiana", 
