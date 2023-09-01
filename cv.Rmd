@@ -3,8 +3,7 @@ name: Lorenzo
 surname: Fabbri
 position: "PhD Student"
 address: "Barcelona Institute for Global Health"
-#phone:
-www: lorenzofabbri.github.io/
+www: https://epilorenzofabbri.com/
 email: "lorenzo.fabbri@isglobal.org"
 github: lorenzoFabbri
 twitter: lorenzoF_SM
@@ -19,64 +18,67 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-
-library(vitae)
-library(tibble)
-library(dplyr)
-library(plyr)
-library(scholar)
-library(stringr)
-library(glue)
-library(lubridate)
-library(zoo)
-library(rorcid)
-library(kableExtra)
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE
+)
 ```
 
 # Research Interests
 
- * Causal Inference, Mediation Analysis
- * Environmental Epidemiology
- 
+* Causal Inference
+* Environmental Epidemiology
+
 # Education
 
 ```{r}
-edu <- rorcid::orcid_educations("0000-0003-3031-322X")$`0000-0003-3031-322X`$`affiliation-group`$summaries %>%
-  plyr::rbind.fill(.)
+edu <-
+  rorcid::orcid_educations("0000-0003-3031-322X")$`0000-0003-3031-322X`$`affiliation-group`$summaries |>
+  plyr::rbind.fill()
 edu$details <- list(
-  c("Projects: HELIX, ATHLETE, OBERON
-  \\begin{itemize}
+  c(
+    "Projects: HELIX, ATHLETE, OBERON
+    \\begin{itemize}
       \\item Supervisors: Prof. Martine Vrijheid (ISGlobal), Prof. Lea Maitre (ISGlobal)
-    \\end{itemize}"), 
-  c("Master thesis (FBK, Trento): \\href{https://gitlab.com/lorenzo.fabbri92sm/master-thesis-fbk}{Machine Learning for Predictive Drug-Induced Hepatotoxicity}
-  \\begin{itemize}
+    \\end{itemize}"
+  ),
+  c(
+    "Master thesis (FBK, Trento): \\href{https://gitlab.com/lorenzo.fabbri92sm/master-thesis-fbk}{Machine Learning for Predictive Drug-Induced Hepatotoxicity}
+    \\begin{itemize}
       \\item Supervisors: Dr. Cesare Furlanello (FBK), Dr. Marco Chierici (FBK), Prof. Enrico Domenici (UNITN)
-    \\end{itemize}", 
-    "Internship (HITS, Heidelberg): \\href{https://gitlab.com/lorenzo.fabbri92sm/master-thesis-hits}{Machine and Deep Learning for Predictive Unbinding Kinetics of Kinases}
+    \\end{itemize}",
+  "Internship (HITS, Heidelberg): \\href{https://gitlab.com/lorenzo.fabbri92sm/master-thesis-hits}{Machine and Deep Learning for Predictive Unbinding Kinetics of Kinases}
     \\begin{itemize}
       \\item Supervisors: Prof. Rebecca Wade (HITS), Dr. Daria Kokh (HITS), Prof. Raffaello Potestio (UNITN)
-    \\end{itemize}", 
-    "Final mark: 110/110 With Honors"), 
-  c("Project: Investigation by Computational Techniques of Channelopaties related to Sodium Channels
-  \\begin{itemize}
+    \\end{itemize}",
+  "Final mark: 110/110 With Honors"
+  ),
+  c(
+    "Project: Investigation by Computational Techniques of Channelopaties related to Sodium Channels
+    \\begin{itemize}
       \\item Supervisors: Prof. Vittorio Limongelli (USI), Prof. Daniele Di Marino (USI)
-    \\end{itemize}"), 
-  c("Bachelor thesis (RWTH, Aachen): Whole-body PBPK Modeling of Valproic Acid
-  \\begin{itemize}
+    \\end{itemize}"
+  ),
+  c(
+    "Bachelor thesis (RWTH, Aachen): Whole-body PBPK Modeling of Valproic Acid
+    \\begin{itemize}
       \\item Supervisors: Prof. Elena Maestri (UNIPR), Prof. Lars M. Blank (RWTH), Dr. Henrik Cordes (RWTH)
-    \\end{itemize}", 
-    "Final mark: 103/110")
+    \\end{itemize}",
+  "Final mark: 103/110"
+  )
 )
 
-edu %>%
+edu |>
   vitae::detailed_entries(
-    what = `education-summary.role-title`, 
-    when = glue::glue("{`education-summary.start-date.year.value`} - {`education-summary.end-date.year.value`}", 
-                      .na = ""), 
-    with = `education-summary.organization.name`, 
-    where = `education-summary.organization.address.city`, 
-    why = details, 
+    what = `education-summary.role-title`,
+    when = glue::glue(
+      "{`education-summary.start-date.year.value`} - {`education-summary.end-date.year.value`}",
+      .na = ""
+    ),
+    with = `education-summary.organization.name`,
+    where = `education-summary.organization.address.city`,
+    why = details,
     .protect = FALSE
   )
 ```
@@ -85,35 +87,41 @@ edu %>%
 
 ```{r}
 tibble::tribble(
-  ~ Course, ~ Institution, ~ Where, ~ Dates, 
-  "Advanced Course in Alternatives to Animal Experimentation", 
-    "University of Genova", "Genoa, Italy", "November 1, 2015", 
-  "MARVEL School on Variationally Enhanced Sampling", 
-    "University of Lugano", "Lugano, Switzerland", "February 1, 2017", 
-  "Effective High Performance Computing Summer School", 
-    "CSCS and University of Lugano", "Lugano, Switzerland", "July 1, 2017", 
-  "Image Analysis and Modeling of Complex Biological Dynamics", 
-    "University of Wurzburg", "Wurzburg, Germany", "September 1, 2017", 
-  "Mendelian Randomisation", "Imperial College London", "Online", "May 1, 2020", 
-  "Metabolomics Data Processing and Data Analysis", 
-    "University of Birmingham", "Online", "February 1, 2021", 
-  "Alpine Exposome Summer School", "Inserm and ATHLETE", "Online", "June 1, 2021", 
-  "Advanced Statistics: Statistical Modelling", 
-    "Swiss Institute of Bioinformatics", "Online", "August 1, 2021", 
-  "ELIXIR Omics Integration and Systems Biology", 
-    "National Bioinformatics Infrastructure Sweden", "Online", "September 1, 2021", 
-  "Fundamentals of Epidemiology (EPM101)", "LSHTM", "Online", "September 1, 2021", 
-  "Computational Bayesian methods using brms in R", "Physalia-courses", "Online", 
-  "February 1, 2022", 
-  "Spring School in Causal Inference with Observational Data", "Causal Insights", 
+  ~ Course, ~ Institution, ~ Where, ~ Dates,
+  "Advanced Course in Alternatives to Animal Experimentation",
+  "University of Genova", "Genoa, Italy", "November 1, 2015",
+  "MARVEL School on Variationally Enhanced Sampling",
+  "University of Lugano", "Lugano, Switzerland", "February 1, 2017",
+  "Effective High Performance Computing Summer School",
+  "CSCS and University of Lugano", "Lugano, Switzerland", "July 1, 2017",
+  "Image Analysis and Modeling of Complex Biological Dynamics",
+  "University of Wurzburg", "Wurzburg, Germany", "September 1, 2017",
+  "Mendelian Randomisation", "Imperial College London", "Online", "May 1, 2020",
+  "Metabolomics Data Processing and Data Analysis",
+  "University of Birmingham", "Online", "February 1, 2021",
+  "Alpine Exposome Summer School", "Inserm and ATHLETE", "Online", "June 1, 2021",
+  "Advanced Statistics: Statistical Modelling",
+  "Swiss Institute of Bioinformatics", "Online", "August 1, 2021",
+  "ELIXIR Omics Integration and Systems Biology",
+  "National Bioinformatics Infrastructure Sweden", "Online", "September 1, 2021",
+  "Fundamentals of Epidemiology (EPM101)", "LSHTM", "Online", "September 1, 2021",
+  "Computational Bayesian methods using brms in R", "Physalia-courses", "Online",
+  "February 1, 2022",
+  "Spring School in Causal Inference with Observational Data", "Causal Insights",
   "Leeds, UK", "April 1, 2022"
-) %>%
-  dplyr::mutate(., Dates = zoo::as.yearmon(lubridate::mdy(Dates))) %>%
-  dplyr::arrange(desc(Dates)) %>%
+) |>
+  dplyr::mutate(
+    Dates = zoo::as.yearmon(lubridate::mdy(Dates))
+  ) |>
+  dplyr::arrange(dplyr::desc(Dates)) |>
   vitae::brief_entries(
-    glue::glue("\\textbf{<Course>} (<Institution>, <Where>)", 
-               .open = "<", .close = ">", .na = ""), 
-    Dates, 
+    glue::glue(
+      "\\textbf{<Course>} (<Institution>, <Where>)",
+      .open = "<",
+      .close = ">",
+      .na = ""
+    ),
+    Dates,
     .protect = FALSE
   )
 ```
@@ -121,14 +129,18 @@ tibble::tribble(
 # Working Experience
 
 ```{r}
-emp <- rorcid::orcid_employments("0000-0003-3031-322X")$`0000-0003-3031-322X`$`affiliation-group`$summaries %>%
-  plyr::rbind.fill(.)
-emp %>%
+emp <-
+  rorcid::orcid_employments("0000-0003-3031-322X")$`0000-0003-3031-322X`$`affiliation-group`$summaries |>
+  plyr::rbind.fill()
+
+emp |>
   vitae::detailed_entries(
-    what = `employment-summary.role-title`, 
-    when = glue::glue("{`employment-summary.start-date.year.value`} - {`employment-summary.end-date`}", 
-                      .na = ""), 
-    with = `employment-summary.organization.name`, 
+    what = `employment-summary.role-title`,
+    when = glue::glue(
+      "{`employment-summary.start-date.year.value`} - {`employment-summary.end-date`}",
+      .na = ""
+    ),
+    with = `employment-summary.organization.name`,
     where = `employment-summary.organization.address.city`
   )
 ```
@@ -137,60 +149,90 @@ emp %>%
 
 ```{r}
 service <- tibble::tribble(
-  ~ type, ~ details, ~ when.start, ~ when.end, 
-  "Organisations", "COnsortium of METabolomics Studies (COMETS) - Early Career Scientist Working Group", 
-  "2022", "", 
+  ~ type, ~ details, ~ when.start, ~ when.end,
+  "Organisations", "COnsortium of METabolomics Studies (COMETS) - Early Career Scientist Working Group", "2022", "",
   "Societies", "International Society for Environmental Epidemiology (ISEE) - 
                 Students and New Researchers Network (SNRN), 
                 Capacity Building and Education Committee, 
-                Europe Chapter", 
-  "2022", ""
+                Europe Chapter", "2022", ""
 )
-service %>%
-  vitae::detailed_entries(with = type, why = details, 
-                          when = glue::glue("{`when.start`} - {`when.end`}", 
-                                            .na = ""))
+
+service |>
+  vitae::detailed_entries(
+    with = type,
+    why = details,
+    when = glue::glue(
+      "{`when.start`} - {`when.end`}",
+      .na = ""
+    )
+  )
 ```
 
 # Skills
 
 ```{r}
 tibble::tribble(
-  ~ Languages, ~ `Programming Languages`, ~ `Markup Languages`, ~ `Software Development`, 
-  "Italian (native), English (C1, IELTS 7.0), Spanish (basic)", 
-  "R, Python, MATLAB, SAS, C", 
-  "\\LaTeX, RMarkdown", 
+  ~ Languages, ~ `Programming Languages`, ~ `Markup Languages`, ~ `Software Development`,
+  "Italian (native), English (C1, IELTS 7.0), Spanish (basic)",
+  "R, Python, MATLAB, SAS, C",
+  "\\LaTeX, RMarkdown",
   "GIT, SLURM, High-Performance Scientific Computing"
-) %>%
-  knitr::kable(booktabs = T, align = 'c', escape = F, format = "latex") %>%
-  kableExtra::kable_styling(full_width = F, font_size = 9, 
-                            latex_options = "hold_position") %>%
-  kableExtra::row_spec(0, bold = T) %>%
-  kableExtra::row_spec(1, bold = F) %>%
-  kableExtra::column_spec(column = 1:4, width = '4.cm')
+) |>
+  knitr::kable(
+    booktabs = T,
+    align = 'c',
+    escape = F,
+    format = "latex"
+  ) |>
+  kableExtra::kable_styling(
+    full_width = F,
+    font_size = 9,
+    latex_options = "hold_position"
+  ) |>
+  kableExtra::row_spec(
+    0,
+    bold = T
+  ) |>
+  kableExtra::row_spec(
+    1,
+    bold = F
+  ) |>
+  kableExtra::column_spec(
+    column = 1:4,
+    width = '4.cm'
+  )
 ```
 
 # Honors and Awards
 
 ```{r}
-fu <- rorcid::orcid_fundings("0000-0003-3031-322X")$`0000-0003-3031-322X`$group$`funding-summary` %>%
-  plyr::rbind.fill(.) %>%
-  dplyr::select(title.title.value, `start-date.year.value`, organization.name)
+fu <- rorcid::orcid_fundings("0000-0003-3031-322X")$`0000-0003-3031-322X`$group$`funding-summary` |>
+  plyr::rbind.fill() |>
+  dplyr::select(
+    title.title.value,
+    `start-date.year.value`,
+    organization.name
+  )
 fu.manual <- tibble::tribble(
-  ~ title.title.value, ~ `start-date.year.value`, ~ organization.name, 
-  "Outstanding Abstract by a Student", 2022, "International Society for Environmental Epidemiology", 
-  "Erasmus+ Traineeship Programme Scholarship", 2019, "Università degli Studi di Trento", 
-  "Student Research Assistant Fellowship", 2017, "Università della Svizzera italiana", 
-  "Faculty of Informatics Scholarship", 2016, "Università della Svizzera italiana", 
+  ~ title.title.value, ~ `start-date.year.value`, ~ organization.name,
+  "Outstanding Abstract by a Student", 2022, "International Society for Environmental Epidemiology",
+  "Erasmus+ Traineeship Programme Scholarship", 2019, "Università degli Studi di Trento",
+  "Student Research Assistant Fellowship", 2017, "Università della Svizzera italiana",
+  "Faculty of Informatics Scholarship", 2016, "Università della Svizzera italiana",
   "Erasmus Traineeship Programme Scholarship", 2015, "Università degli Studi di Parma"
 )
-fu %>%
-  plyr::rbind.fill(fu.manual) %>%
-  dplyr::arrange(desc(`start-date.year.value`)) %>%
+
+fu |>
+  plyr::rbind.fill(fu.manual) |>
+  dplyr::arrange(dplyr::desc(`start-date.year.value`)) |>
   vitae::brief_entries(
-    what = glue::glue("\\textbf{<title.title.value>} (<organization.name>)", 
-                      .open = "<", .close = ">", .na = ""), 
-    when = `start-date.year.value`, 
+    what = glue::glue(
+      "\\textbf{<title.title.value>} (<organization.name>)",
+      .open = "<",
+      .close = ">",
+      .na = ""
+    ),
+    when = `start-date.year.value`,
     .protect = FALSE
   )
 ```
@@ -198,16 +240,22 @@ fu %>%
 # Publications
 
 ```{r publications}
-scholar::get_publications("QbPv1H0AAAAJ") %>%
-  dplyr::mutate(author = author %>% as.character() %>% stringr::str_trim(), 
-                journal = journal, 
-                first_author = dplyr::case_when(stringr::str_starts(author, "L Fabbri") ~ TRUE, 
-                                                TRUE ~ FALSE)) %>%
-  dplyr::arrange(desc(year)) %>%
+scholar::get_publications("QbPv1H0AAAAJ") |>
+  dplyr::mutate(
+    author = author |>
+      as.character() |>
+      stringr::str_trim(),
+    journal = journal,
+    first_author = dplyr::case_when(
+      stringr::str_starts(author, "L Fabbri") ~ TRUE,
+      TRUE ~ FALSE
+    )
+  ) |>
+  dplyr::arrange(dplyr::desc(year)) |>
   vitae::detailed_entries(
-    what = title, 
-    when = as.character(year), 
-    with = author, 
+    what = title,
+    when = as.character(year),
+    with = author,
     where = journal
   )
 ```
@@ -215,19 +263,29 @@ scholar::get_publications("QbPv1H0AAAAJ") %>%
 # Conference Presentations
 
 ```{r}
-conf <- rorcid::orcid_works("0000-0003-3031-322X")$`0000-0003-3031-322X`$works %>%
-  plyr::rbind.fill(.)
-conf[conf$`put-code` == "105548271", ]$title.title.value <- "Efficient and Portable MPI Support for Approximate Bayesian Computation"
-conf[conf$`put-code` == "105548271", ]$`publication-date.year.value` <- 2017
-conf[conf$`put-code` == "105548590", ]$`publication-date.year.value` <- 2022
+conf <-
+  rorcid::orcid_works("0000-0003-3031-322X")$`0000-0003-3031-322X`$works |>
+  plyr::rbind.fill()
+conf[conf$`put-code` == "105548271",]$title.title.value <-
+  "Efficient and Portable MPI Support for Approximate Bayesian Computation"
+conf[conf$`put-code` == "105548271",]$`publication-date.year.value` <-
+  2017
+conf[conf$`put-code` == "105548590",]$`publication-date.year.value` <-
+  2022
 
-conf %>%
-  dplyr::filter(type == "conference-poster") %>%
-  dplyr::arrange(desc(`publication-date.year.value`)) %>%
+conf |>
+  dplyr::filter(
+    type == "conference-poster"
+  ) |>
+  dplyr::arrange(dplyr::desc(`publication-date.year.value`)) |>
   vitae::detailed_entries(
-    when = `publication-date.year.value`, 
-    what = glue::glue("\\href{<url.value>}{<title.title.value>}", 
-                     .open = "<", .close = ">", .na = ""), 
+    when = `publication-date.year.value`,
+    what = glue::glue(
+      "\\href{<url.value>}{<title.title.value>}",
+      .open = "<",
+      .close = ">",
+      .na = ""
+    ),
     .protect = FALSE
   )
 ```
